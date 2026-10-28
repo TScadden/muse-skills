@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+cache/
+.write-lock
+*.muse-github-snapshot-sync.json
+.DS_Store

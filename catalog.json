@@ -151,6 +151,16 @@
       "placeholders": [],
       "setup": "None.",
       "title": "Verify summaries before reporting"
+    },
+    {
+      "name": "subagent-teams",
+      "title": "Subagents and teams",
+      "folder": "skills/subagent-teams",
+      "kind": "playbook",
+      "origin": "Original.",
+      "description": "Automatically break suitable tasks into delegated work: spawn subagents for independent or long-running parts, run independent pieces in parallel, and form a small role-based team under one coordinator when a task needs several specialists. Verify everything that comes back before reporting it.",
+      "placeholders": [],
+      "setup": "None."
     }
   ],
   "version": 1

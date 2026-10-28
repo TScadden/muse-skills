@@ -36,6 +36,7 @@ walkthrough written for the Muse agent itself.
 | long-work-status-checkpoints | Result-first status checkpoints for long or delegated work | Playbook | None |
 | reference-video-first | Watch the actual reference video and spec its format before building | Playbook | None |
 | verify-summaries | Check delegated summaries against the full source before reporting | Playbook | None |
+| subagent-teams | Split big tasks across subagents and role-based teams under one coordinator | Playbook | None |
 
 Machine-readable details, including every placeholder to ask about, are in
 `catalog.json`.

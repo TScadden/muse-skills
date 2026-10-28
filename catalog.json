@@ -149,6 +149,16 @@
       "description": "Automatically break suitable tasks into delegated work: spawn subagents for independent or long-running parts, run independent pieces in parallel, and form a small role-based team under one coordinator when a task needs several specialists. Verify everything that comes back before reporting it.",
       "placeholders": [],
       "setup": "None."
+    },
+    {
+      "name": "self-improvement-loop",
+      "title": "Self-improvement loop",
+      "folder": "skills/self-improvement-loop",
+      "kind": "playbook",
+      "origin": "Original.",
+      "description": "Run a continuous, autonomous self-improvement loop: learn from every mistake the same day by changing the process that caused it and verifying the change held, scout for better tools and adopt what measurably helps, calibrate predictions against outcomes, and keep memory and standing rules clean.",
+      "placeholders": [],
+      "setup": "None."
     }
   ],
   "version": 1

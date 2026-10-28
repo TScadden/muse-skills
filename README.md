@@ -31,7 +31,6 @@ walkthrough written for the Muse agent itself.
 | people-search-scrub | Remove your number from people-search sites and data brokers, site by site | Playbook | Your details, kept private |
 | build-wiring-readback-audit | Prove an app screen's controls are wired and its saves landed before calling it done | Playbook | None |
 | design-system-audit | Audit screens against the project's own measured design tokens and standards | Playbook | Fill in project values |
-| faith-post-design | Build faith and Hebrew carousels in their established formats | Playbook | None |
 | file-delivery | Deliver files whole: attach the file, state its size, unique names, verify | Playbook | None |
 | limited-download-guard | Spend limited export downloads wisely: verify on disk before any retry | Playbook | None |
 | long-work-status-checkpoints | Result-first status checkpoints for long or delegated work | Playbook | None |

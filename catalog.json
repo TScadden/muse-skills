@@ -1,1 +1,157 @@
-{"library":"muse-skills","notes":"Machine-readable catalog for the installing Muse. Each entry maps to a folder under skills/. 'placeholders' lists values to ask the user for at install time; store the answers privately for that user and never commit them back to a shared copy.","skills":[{"description":"Geolocate or chronolocate a photo with tool-verified reasoning: metadata, OCR and reverse image search, a candidate board that ranks hypotheses, satellite and street-view matching, and sun/shadow math. Outputs coordinates plus an error radius with evidence.","folder":"skills/geo-sleuth","kind":"tool","name":"geo-sleuth","origin":"Third-party open-source skill (upstream: Oldcircle/geo-sleuth), included as installed.","placeholders":[],"setup":"Run python3 scripts/doctor.py inside the skill folder and follow its report; first run installs its Python dependencies (uv-managed) and may download a browser for street-view work.","title":"GeoSleuth photo geolocation"},{"description":"Live geospatial answers from keyless public APIs: planes overhead, ISS passes, earthquakes, weather, wildfires, cyclones, rocket launches, Utah traffic cameras, satellite photos, submarine cables, radio stations, elevation, drive time.","folder":"skills/gods-eye","kind":"tool","name":"gods-eye","origin":"Original. Concept inspired by bilawalsidhu/gods-eye-view (MIT); all queries hit keyless public APIs.","placeholders":["GODS_EYE_HOME_LAT","GODS_EYE_HOME_LON","GODS_EYE_TZ"],"setup":"python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder.","title":"Gods-Eye live geo lookup"},{"description":"Live NHL data from the league's official public APIs: scores, player season stats and recent form, team schedules, standings, leader boards. Sequential requests only.","folder":"skills/nhl-stats","kind":"tool","name":"nhl-stats","origin":"Original.","placeholders":["NHL_TZ (optional)"],"setup":"python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder.","title":"NHL stats"},{"description":"Read an ESPN fantasy hockey league through ESPN's JSON API: a logged-in browser saves the API JSON (as PDF when large), pdfjson.py recovers clean JSON, espn.py parses standings, rosters, the points race, and recent activity. Read-only.","folder":"skills/espn-fantasy","kind":"tool","name":"espn-fantasy","origin":"Generalized from a private original; league identifiers replaced with environment variables.","placeholders":["ESPN_FHL_LEAGUE_ID","ESPN_FHL_SEASON_YEAR","ESPN_FHL_LEAGUE_NAME","ESPN_FHL_TEAM_NAME","ESPN_FHL_TZ (optional)"],"setup":"python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder. pdfjson.py also needs pdftotext (poppler) on PATH.","title":"ESPN fantasy hockey reader"},{"description":"FDA drug label text, NDC product details, and recall records from the free openFDA API. Reference information only, never medical advice.","folder":"skills/drug-info","kind":"tool","name":"drug-info","origin":"Original.","placeholders":[],"setup":"None; druginfo.py uses only the Python standard library.","title":"openFDA drug info"},{"description":"Remove the user's phone number and listings from people-search sites and data brokers, site by site, with official opt-outs and email confirmations, and a per-site report.","folder":"skills/people-search-scrub","kind":"playbook","name":"people-search-scrub","origin":"Generalized from a private original; all personal details replaced with placeholders.","placeholders":["<FULL_NAME>","<PHONE_NUMBER>","<CITY>","<STATE>","<EMAIL>"],"setup":"Ask the user for the placeholder values once; keep them in your private memory of the user, not in any shared file.","title":"People-search scrub"},{"description":"Audit a built app screen or tool before calling it done: inventory every control, trace each save to the canonical store, verify by readback, and exercise the failure path.","folder":"skills/build-wiring-readback-audit","kind":"playbook","name":"build-wiring-readback-audit","origin":"Original.","placeholders":[],"setup":"None.","title":"Build wiring and readback audit"},{"description":"Audit app screens against the project's own measured design system: tokens, type scale, spacing grid, contrast, touch targets, motion. Measure from theme source, never eyeball.","folder":"skills/design-system-audit","kind":"playbook","name":"design-system-audit","origin":"Generalized template adapted from a private, app-specific original; all brand values removed.","placeholders":["Project token values and owner overrides (filled in per project)"],"setup":"Fill in the Project values and overrides sections from the app's theme source before the first audit.","title":"Design system audit"},{"description":"Build a faith or Hebrew carousel post in the established format for its category: load the category format first, verify claims against multiple sources, deliver grouped with unique filenames.","folder":"skills/faith-post-design","kind":"playbook","name":"faith-post-design","origin":"Original.","placeholders":[],"setup":"None.","title":"Faith post design"},{"description":"Attach the file itself, state its exact size, use unique filenames, switch channels when a download truncates, and verify before calling anything delivered.","folder":"skills/file-delivery","kind":"playbook","name":"file-delivery","origin":"Original.","placeholders":[],"setup":"None.","title":"File delivery that arrives whole"},{"description":"Acquire an export or archive with a download limit or expiry without burning attempts: verify each attempt on disk before any retry, and stop before the last attempt.","folder":"skills/limited-download-guard","kind":"playbook","name":"limited-download-guard","origin":"Original.","placeholders":[],"setup":"None.","title":"Limited download guard"},{"description":"Keep the user informed during long or delegated work with result-first checkpoints at every milestone, so work never goes silent and done means verified.","folder":"skills/long-work-status-checkpoints","kind":"playbook","name":"long-work-status-checkpoints","origin":"Original.","placeholders":[],"setup":"None.","title":"Long work status checkpoints"},{"description":"Build a video modeled on a reference by watching the actual reference first, sampling frames across it, and writing a format spec before producing anything.","folder":"skills/reference-video-first","kind":"playbook","name":"reference-video-first","origin":"Original.","placeholders":[],"setup":"None.","title":"Reference video first"},{"description":"Verify delegated work, research, and subagent summaries against the full source before reporting conclusions, and correct wrong relayed claims plainly and immediately.","folder":"skills/verify-summaries","kind":"playbook","name":"verify-summaries","origin":"Original.","placeholders":[],"setup":"None.","title":"Verify summaries before reporting"}],"version":1}
+{
+  "library": "muse-skills",
+  "notes": "Machine-readable catalog for the installing Muse. Each entry maps to a folder under skills/. 'placeholders' lists values to ask the user for at install time; store the answers privately for that user and never commit them back to a shared copy.",
+  "skills": [
+    {
+      "description": "Geolocate or chronolocate a photo with tool-verified reasoning: metadata, OCR and reverse image search, a candidate board that ranks hypotheses, satellite and street-view matching, and sun/shadow math. Outputs coordinates plus an error radius with evidence.",
+      "folder": "skills/geo-sleuth",
+      "kind": "tool",
+      "name": "geo-sleuth",
+      "origin": "Third-party open-source skill (upstream: Oldcircle/geo-sleuth), included as installed.",
+      "placeholders": [],
+      "setup": "Run python3 scripts/doctor.py inside the skill folder and follow its report; first run installs its Python dependencies (uv-managed) and may download a browser for street-view work.",
+      "title": "GeoSleuth photo geolocation"
+    },
+    {
+      "description": "Live geospatial answers from keyless public APIs: planes overhead, ISS passes, earthquakes, weather, wildfires, cyclones, rocket launches, Utah traffic cameras, satellite photos, submarine cables, radio stations, elevation, drive time.",
+      "folder": "skills/gods-eye",
+      "kind": "tool",
+      "name": "gods-eye",
+      "origin": "Original. Concept inspired by bilawalsidhu/gods-eye-view (MIT); all queries hit keyless public APIs.",
+      "placeholders": [
+        "GODS_EYE_HOME_LAT",
+        "GODS_EYE_HOME_LON",
+        "GODS_EYE_TZ"
+      ],
+      "setup": "python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder.",
+      "title": "Gods-Eye live geo lookup"
+    },
+    {
+      "description": "Live NHL data from the league's official public APIs: scores, player season stats and recent form, team schedules, standings, leader boards. Sequential requests only.",
+      "folder": "skills/nhl-stats",
+      "kind": "tool",
+      "name": "nhl-stats",
+      "origin": "Original.",
+      "placeholders": [
+        "NHL_TZ (optional)"
+      ],
+      "setup": "python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder.",
+      "title": "NHL stats"
+    },
+    {
+      "description": "Read an ESPN fantasy hockey league through ESPN's JSON API: a logged-in browser saves the API JSON (as PDF when large), pdfjson.py recovers clean JSON, espn.py parses standings, rosters, the points race, and recent activity. Read-only.",
+      "folder": "skills/espn-fantasy",
+      "kind": "tool",
+      "name": "espn-fantasy",
+      "origin": "Generalized from a private original; league identifiers replaced with environment variables.",
+      "placeholders": [
+        "ESPN_FHL_LEAGUE_ID",
+        "ESPN_FHL_SEASON_YEAR",
+        "ESPN_FHL_LEAGUE_NAME",
+        "ESPN_FHL_TEAM_NAME",
+        "ESPN_FHL_TZ (optional)"
+      ],
+      "setup": "python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder. pdfjson.py also needs pdftotext (poppler) on PATH.",
+      "title": "ESPN fantasy hockey reader"
+    },
+    {
+      "description": "FDA drug label text, NDC product details, and recall records from the free openFDA API. Reference information only, never medical advice.",
+      "folder": "skills/drug-info",
+      "kind": "tool",
+      "name": "drug-info",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None; druginfo.py uses only the Python standard library.",
+      "title": "openFDA drug info"
+    },
+    {
+      "description": "Remove the user's phone number and listings from people-search sites and data brokers, site by site, with official opt-outs and email confirmations, and a per-site report.",
+      "folder": "skills/people-search-scrub",
+      "kind": "playbook",
+      "name": "people-search-scrub",
+      "origin": "Generalized from a private original; all personal details replaced with placeholders.",
+      "placeholders": [
+        "<FULL_NAME>",
+        "<PHONE_NUMBER>",
+        "<CITY>",
+        "<STATE>",
+        "<EMAIL>"
+      ],
+      "setup": "Ask the user for the placeholder values once; keep them in your private memory of the user, not in any shared file.",
+      "title": "People-search scrub"
+    },
+    {
+      "description": "Audit a built app screen or tool before calling it done: inventory every control, trace each save to the canonical store, verify by readback, and exercise the failure path.",
+      "folder": "skills/build-wiring-readback-audit",
+      "kind": "playbook",
+      "name": "build-wiring-readback-audit",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None.",
+      "title": "Build wiring and readback audit"
+    },
+    {
+      "description": "Audit app screens against the project's own measured design system: tokens, type scale, spacing grid, contrast, touch targets, motion. Measure from theme source, never eyeball.",
+      "folder": "skills/design-system-audit",
+      "kind": "playbook",
+      "name": "design-system-audit",
+      "origin": "Generalized template adapted from a private, app-specific original; all brand values removed.",
+      "placeholders": [
+        "Project token values and owner overrides (filled in per project)"
+      ],
+      "setup": "Fill in the Project values and overrides sections from the app's theme source before the first audit.",
+      "title": "Design system audit"
+    },
+    {
+      "description": "Attach the file itself, state its exact size, use unique filenames, switch channels when a download truncates, and verify before calling anything delivered.",
+      "folder": "skills/file-delivery",
+      "kind": "playbook",
+      "name": "file-delivery",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None.",
+      "title": "File delivery that arrives whole"
+    },
+    {
+      "description": "Acquire an export or archive with a download limit or expiry without burning attempts: verify each attempt on disk before any retry, and stop before the last attempt.",
+      "folder": "skills/limited-download-guard",
+      "kind": "playbook",
+      "name": "limited-download-guard",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None.",
+      "title": "Limited download guard"
+    },
+    {
+      "description": "Keep the user informed during long or delegated work with result-first checkpoints at every milestone, so work never goes silent and done means verified.",
+      "folder": "skills/long-work-status-checkpoints",
+      "kind": "playbook",
+      "name": "long-work-status-checkpoints",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None.",
+      "title": "Long work status checkpoints"
+    },
+    {
+      "description": "Build a video modeled on a reference by watching the actual reference first, sampling frames across it, and writing a format spec before producing anything.",
+      "folder": "skills/reference-video-first",
+      "kind": "playbook",
+      "name": "reference-video-first",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None.",
+      "title": "Reference video first"
+    },
+    {
+      "description": "Verify delegated work, research, and subagent summaries against the full source before reporting conclusions, and correct wrong relayed claims plainly and immediately.",
+      "folder": "skills/verify-summaries",
+      "kind": "playbook",
+      "name": "verify-summaries",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None.",
+      "title": "Verify summaries before reporting"
+    }
+  ],
+  "version": 1
+}

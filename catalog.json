@@ -27,18 +27,6 @@
       "title": "Gods-Eye live geo lookup"
     },
     {
-      "description": "Live NHL data from the league's official public APIs: scores, player season stats and recent form, team schedules, standings, leader boards. Sequential requests only.",
-      "folder": "skills/nhl-stats",
-      "kind": "tool",
-      "name": "nhl-stats",
-      "origin": "Original.",
-      "placeholders": [
-        "NHL_TZ (optional)"
-      ],
-      "setup": "python3 -m venv .venv && .venv/bin/pip install -r requirements.txt inside the skill folder.",
-      "title": "NHL stats"
-    },
-    {
       "description": "Read an ESPN fantasy hockey league through ESPN's JSON API: a logged-in browser saves the API JSON (as PDF when large), pdfjson.py recovers clean JSON, espn.py parses standings, rosters, the points race, and recent activity. Read-only.",
       "folder": "skills/espn-fantasy",
       "kind": "tool",

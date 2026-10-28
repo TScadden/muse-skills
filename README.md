@@ -25,7 +25,6 @@ walkthrough written for the Muse agent itself.
 | --- | --- | --- | --- |
 | geo-sleuth | Geolocate a photo with tool-verified reasoning and an evidence trail | Tool | Its doctor script |
 | gods-eye | Live flights, weather, quakes, fires, launches, cameras, drive time for any point | Tool | venv + your home coordinates |
-| nhl-stats | Live NHL scores, player stats, schedules, standings from the official APIs | Tool | venv |
 | espn-fantasy | Read an ESPN fantasy hockey league's JSON: standings, rosters, points race, activity | Tool | venv + your league's values |
 | drug-info | FDA drug labels, NDC details, and recalls via openFDA. Reference only | Tool | None |
 | people-search-scrub | Remove your number from people-search sites and data brokers, site by site | Playbook | Your details, kept private |

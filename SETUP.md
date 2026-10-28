@@ -12,9 +12,16 @@ fantasy league?", "check that drug's label") and have the right skill fire.
 1. **Read before you run.** Open every `SKILL.md` and skim every script
    before executing anything from this repo. If a script does something you
    did not expect from its skill description, stop and tell the user.
-2. **No skill here needs a password, API key, or payment.** Every tool uses
-   free, keyless public APIs. If anything asks for a credential, that is a
-   stop sign, not a step.
+2. **No skill here needs an API key or a payment, and none should ever ask
+   for your password.** The data tools read free, keyless public APIs. Two
+   skills do work through your own existing sign-ins, which is a different
+   thing: **espn-fantasy** reads your league in a browser where you are
+   already signed in to ESPN (its parser never touches the network and
+   never sees a password), and **people-search-scrub** finishes opt-out
+   confirmations from your own email inbox. Signing in as yourself, in
+   your own browser, where a skill's steps call for it is normal. Anything
+   beyond that (a credential prompt you did not expect, a paywall, an ID
+   request) is a stop sign: hand it to the user.
 3. **Placeholder values are the user's private data.** Ask for them in
    conversation, store them in your own memory of the user or in the
    installed copy only, and never send them back to this repository or
@@ -99,7 +106,9 @@ Skill-specific notes:
 - **espn-fantasy**: `pdfjson.py` additionally needs `pdftotext` on the PATH
   (the poppler tools). Check with `which pdftotext`; if missing, tell the
   user it is only needed for the PDF recovery step and note it as pending
-  rather than blocking the install.
+  rather than blocking the install. Its fetch step (in its `SKILL.md`)
+  happens in a browser signed in to the user's own ESPN account; that
+  sign-in is the user's to complete if the browser is not already there.
 - **geo-sleuth**: do not create a venv by hand. Run
   `python3 scripts/doctor.py` inside its folder and follow its report; it
   manages its own dependencies (uv) and may download a browser component on

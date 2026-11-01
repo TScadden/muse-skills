@@ -37,6 +37,7 @@ walkthrough written for the Muse agent itself.
 | verify-summaries | Check delegated summaries against the full source before reporting | Playbook | None |
 | subagent-teams | Split big tasks across subagents and role-based teams under one coordinator | Playbook | None |
 | self-improvement-loop | Learn from every mistake, scout better tools, calibrate, and keep rules clean | Playbook | None |
+| stageshow | Build faux product UI stills and animated cursor demos that read as a real product | Tool | Node 20.19+, npm install |
 
 Machine-readable details, including every placeholder to ask about, are in
 `catalog.json`.

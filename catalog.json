@@ -159,6 +159,16 @@
       "description": "Run a continuous, autonomous self-improvement loop: learn from every mistake the same day by changing the process that caused it and verifying the change held, scout for better tools and adopt what measurably helps, calibrate predictions against outcomes, and keep memory and standing rules clean.",
       "placeholders": [],
       "setup": "None."
+    },
+    {
+      "name": "stageshow",
+      "title": "Stageshow faux product UI",
+      "folder": "skills/stageshow",
+      "kind": "tool",
+      "description": "Build faux product UI that looks like a real product, as a still illustration or an animated demo with a cursor: browser and app windows, dashboards, phones, notifications, terminals, bento grids and cursor walkthroughs, framed and cropped the way a marketing page, feature card or docs hero needs them. React and plain CSS kit with gold examples and a filming/rehearsal workflow.",
+      "origin": "Third-party open-source skill (upstream: benjitaylor/skills, MIT licensed), included as installed.",
+      "placeholders": [],
+      "setup": "Requires Node 20.19 or later. Inside the skill folder run npm install; npm run dev serves the example playground."
     }
   ],
   "version": 1

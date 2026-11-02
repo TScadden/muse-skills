@@ -150,6 +150,7 @@ that step: code generated shapes, nobody designed them.
 | Dark or inside-out patches in Studio | Flipped normals | Recalculate outside; check Face Orientation before export |
 | Scatter modifier replaced the mesh with instances | GN graph forgot to join the source geometry back | Join Geometry node takes source + instances (recipes file) |
 | GN graph crashes on Blender 4.x | Built with pre-4.0 `inputs.new()` API | Use `tree.interface.new_socket(...)` |
+| Whole asset renders WHITE (or unshaded) after adding a GN scatter, though every part's vertex colours check out | Realizing instances leaves an **empty material slot** on the host mesh; on join, every polygon keeps material_index 0 (the empty slot) and the appended vertex-colour material is never used | Clear the host mesh's material slots right after applying the GN modifier (`obj.data.materials.clear()`), before joining/painting. Diagnose by printing the joined object's material list — `[None, 'VCOL']` is the tell |
 
 ## Scripting notes (headless Blender via bpy)
 

@@ -28,6 +28,7 @@ walkthrough written for the Muse agent itself.
 | espn-fantasy | Read an ESPN fantasy hockey league's JSON: standings, rosters, points race, activity | Tool | venv + your league's values |
 | drug-info | FDA drug labels, NDC details, and recalls via openFDA. Reference only | Tool | None |
 | people-search-scrub | Remove your number from people-search sites and data brokers, site by site | Playbook | Your details, kept private |
+| blender-modeling | Model stylized game assets in Blender: reference-driven, proportion-first, gated QC | Playbook | Blender 4.x |
 | build-wiring-readback-audit | Prove an app screen's controls are wired and its saves landed before calling it done | Playbook | None |
 | design-system-audit | Audit screens against the project's own measured design tokens and standards | Playbook | Fill in project values |
 | file-delivery | Deliver files whole: attach the file, state its size, unique names, verify | Playbook | None |

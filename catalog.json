@@ -169,6 +169,16 @@
       "origin": "Third-party open-source skill (upstream: benjitaylor/skills, MIT licensed), included as installed.",
       "placeholders": [],
       "setup": "Requires Node 20.19 or later. Inside the skill folder run npm install; npm run dev serves the example playground."
+    },
+    {
+      "name": "blender-modeling",
+      "title": "Blender modeling for game assets",
+      "folder": "skills/blender-modeling",
+      "kind": "playbook",
+      "origin": "Original. Generalized from a stylized game-asset project; project specifics reduced to the transferable method and generic examples.",
+      "description": "Model stylized game assets and characters in Blender (headless, via bpy scripts) the professional way: reference images as scene planes with measured proportion landmarks, blockout then structural subdivision/sculpt modeling, Geometry Nodes assists (ornament scatter, garlands, snow caps), vertex-colour zones, FBX export for Roblox MeshParts, and hard render QC gates (silhouette test, reference side-by-side, blocks test). Includes a failure-mode table for primitive-silhouette and unstructured-blob models.",
+      "placeholders": [],
+      "setup": "Requires Blender 4.x (blender on PATH). No Python packages; build scripts run with blender --background --python."
     }
   ],
   "version": 1

@@ -80,3 +80,5 @@ repo owner.
 Oldcircle/geo-sleuth), included as installed. `gods-eye` was inspired by
 bilawalsidhu/gods-eye-view (MIT). Everything else is original work shared
 for other Muse users.
+| blender | Headless bpy scripting done right: data API over operators, join discipline, numeric render verification (third-party, MartinRapcan, MIT; scripts target Blender 5.x) | Blender 5.x |
+| blender-image-to-3d | Gated image-to-3D game-asset pipeline with measured silhouette gates, validation and export roundtrip checks (third-party, Majid Manzarpour, MIT) | Blender 4.2+, Pillow |

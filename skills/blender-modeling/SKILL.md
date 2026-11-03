@@ -9,10 +9,8 @@ Goal: an asset that **survives the owner's eyes** — it reads as the
 reference, at final scale, in a flat render, before anyone is told what
 it is.
 
-> Method sources: the Blender Manual (subdivision, sculpting/adaptive
-> resolution, geometry nodes) and published game-character pipeline
-> write-ups; claims in the references are cited to them. This file is
-> the executable summary.
+> Study notes behind this skill: `~/workspace/research_notes/blender-modeling-study-20261102/`
+> (sources cited per claim). This file is the executable summary.
 
 ## The one law
 
@@ -175,3 +173,29 @@ that step: code generated shapes, nobody designed them.
   with full node wiring (scatter, garland-along-curve, snow cap).
 - `references/roblox-export.md` — Roblox MeshPart delivery spec.
 - `references/qc-gates.md` — the gate checklist as a fill-in form.
+
+## Companion skills (adopted Nov 3, 2026)
+
+This skill is the taste and QC layer: what good looks like, and the
+gates an asset must pass. Two adopted companions supply the technical
+layers beneath it:
+
+- **`blender`** (MartinRapcan/blender-claude-skill, MIT) — bpy
+  correctness: data-API over context-dependent operators, join vs
+  boolean vs parent discipline, normals and manifold checks, color
+  spaces, numeric render verification (`verify_render`), and the
+  failure-mode table for headless scripts. Its scripts hard-require
+  Blender 5.x (version assert, 5.x-only light APIs); the doctrine and
+  references apply on any version. Always run headless builds with
+  `--python-exit-code 1` so a crashed script cannot look successful.
+  Run its scripts on a Blender 5.x install kept beside the older
+  pipeline Blender; migrate a project deliberately, not by accident.
+- **`blender-image-to-3d`** (majidmanzarpour/blender-game-skills, MIT)
+  — the measured version of these gates for image-to-3D work:
+  silhouette IoU and band-width tolerances via `compose_review.py` /
+  `world_gate.py`, `validate.py` topology and budget checks, and
+  `roundtrip.py`, which re-imports an export into a blank scene and
+  renders what actually arrived. Run validate + roundtrip on game
+  exports before they leave this machine. Scripts load on Blender
+  4.0.2; the skill's stated floor is 4.2, so treat deep-pipeline
+  results on 4.0.2 with care.

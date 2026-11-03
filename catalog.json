@@ -293,14 +293,26 @@
   {
    "name": "sound-design-pass",
    "title": "Sound Design Pass",
-   "description": "Add a deliberate SFX layer to an edited video: detect moments that need sound, write a cue sheet, place sounds under voice and music at disciplined levels, verify acoustically.",
+   "description": "Local wrapper over the real-sfx skill for sound-designing an edited video, with the owner's scope guardrails (locked-format series excluded, faith-content care, delivery verification).",
    "folder": "skills/sound-design-pass",
    "kind": "playbook",
-   "origin": "Original, generalized from a creator workflow the owner asked to adopt.",
+   "origin": "Original wrapper, generalized; engine is the third-party real-sfx skill in this library.",
    "placeholders": [
     "SFX_KIT_PATH"
    ],
    "setup": "ffmpeg; build the six starter sounds once into your sfx-kit folder (synthesis recipes in the skill)."
+  },
+  {
+   "name": "real-sfx",
+   "title": "Real SFX",
+   "description": "Sound-design motion videos with real recorded sounds from the user's own library, placed on the exact frame: moment detection, level matching, pitch tuning to the score, mono check, and a self-critique loop that ends with five moments to check by ear. Ships with 78 CC0 UI cues.",
+   "folder": "skills/real-sfx",
+   "kind": "tool",
+   "origin": "Third-party open-source skill (upstream: Clipwing/skills, by Alexander Korbanov; scripts MIT, bundled uisfx sounds CC0), included as installed.",
+   "placeholders": [
+    "SFX_LIBRARY_PATH"
+   ],
+   "setup": "Python 3.9+ and FFmpeg in PATH; run python scripts/setup.py check inside the skill folder, then point it at a sound library or start with the bundled uisfx cues."
   }
  ],
  "version": 1

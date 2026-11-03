@@ -1,36 +1,29 @@
 ---
 name: sound-design-pass
-description: Add a deliberate sound-design pass to an edited video: detect the moments that need sound, write a cue sheet, place real SFX under the voice and music, and verify placement acoustically. Use after picture lock on explainers, spec ads, jump-cut edits, trailers, and social edits. Learned from a creator workflow in which the AI watches the cut and places sounds from a library.
+description: Local wrapper for sound-designing an edited video. The engine is the installed real-sfx skill (Clipwing, MIT scripts, CC0 UI sounds): real recorded sounds placed on the exact frame, critique loop to a score of 8+, five moments listed for a by-ear check. This wrapper adds the owner's scope guardrails. Use after picture lock on explainers, spec ads, jump-cut edits, trailers, promos, and social edits.
 ---
 
-# Sound Design Pass
+# Sound Design Pass (local wrapper over real-sfx)
 
-The gap this closes: our edits ship with voice and a music bed, and the picture does all the work alone. Professional edits sound designed: transitions breathe, builds land, hits thump. This pass adds that layer deliberately, from a cue sheet, never by sprinkling sounds at random.
+**Primary engine: the `real-sfx` skill** in the companion `real-sfx` skill in this library. Run its pipeline, not an improvised one:
 
-## Scope
+1. `python scripts/setup.py check` in the real-sfx folder (ffmpeg, libraries, uisfx index).
+2. `look.py` the film (frames plus the original sound's spectrogram), then get events from the best source: the project's own cue list or synthesizer script, a screen-recording analysis, a HyperFrames timeline, or `find_moments.py` frame analysis (with `--fine` for soft coloured animation), writing the event list from close-up frames when automation under-reads the picture.
+3. `mix.py` to place REAL recordings at the level the author's own sounds had, tuned to the music's notes, mono-checked so nothing vanishes on a phone speaker. Output is always a new MP4 plus a separate SFX WAV track.
+4. `critique.py` loop until the score is 8 or higher, then hand the user the five moments to check by ear. Rusty cannot hear; never present a pick as listened to. Say what was measured and what he should listen to.
 
-- Applies to: jump-cut and explainer editing systems, spec ads, trailers, and any social edit where picture events carry meaning.
-- Does NOT apply to any series whose format the user has locked (for example a talk-over-scenery series with a fixed voice, music bed, and caption format). Only add sound design there if the user explicitly asks for that episode.
-- Faith content rule: never place a comic or percussive sound over spoken scripture or a speaker's solemn moment. When in doubt, leave the moment dry.
+Doctrine inherited from real-sfx: **sound is never synthesized for motion work.** If no fitting real recording exists, the moment stays quiet and is listed in the report. The bundled uisfx pack (78 CC0 UI cues) covers interface moments; broader whooshes, hits, and foley need a real library, so building one from CC0 sources (Freesound CC0 filter, Sonniss GDC, Mixkit, Pixabay, license checked per file) is the standing way to grow coverage.
 
-## Workflow
+## Owner guardrails (these override the engine)
 
-1. **Detect events** on the locked cut:
-   - Scene changes: `ffmpeg -i in.mp4 -vf "select='gt(scene,0.35)',showinfo" -f null -` for cut points.
-   - Frame sampling at each cut plus any text, title, diagram, or UI event the storyboard names.
-   - Word timings from the existing whisper transcript: elements that build ON a word get their cue on that word.
-2. **Write the cue sheet** before touching audio: timestamp, event, sound class, intensity (soft, medium, hard). One cue per event; density cap of about one cue per 1.5 seconds in talk-driven edits, and silence is a valid choice for most moments. The cue sheet is part of the edit's paper trail.
-3. **Map event to class**:
-   - Hard cut with subject change → whoosh (soft) or nothing
-   - Element builds, diagram step, text pop → pop or click
-   - Build toward a reveal → riser ending exactly on the reveal frame
-   - Title or logo lands → slam (hard) or chime (soft, faith-safe)
-   - Success or completion beat → chime
-   - Rapid jump-cut run → at most a soft click on the first and last cut, never every cut
-4. **Place and mix**: starter kit in a local `sfx-kit/` folder you create once (click, pop, whoosh, riser, slam, chime; all peaked at -6 dBFS so levels are predictable). Place with ffmpeg `adelay` and `amix`/`sidechain`-free manual gains. Starting levels: cues sit 14 to 20 dB under voice peaks; a slam may come up to 10 dB under for a title hit. Trim clicks and pops tight; a cue that starts early or rings into the next word is a defect.
-5. **Verify acoustically** (same discipline as the caption gates): check the waveform at every cue point, confirm no cue starts mid-word or masks a word onset, and confirm the mix still passes the delivery spec (h264, High, yuv420p, faststart) after the final mux. Re-transcribe the finished file when speech matters; the words must survive the sounds.
+- **Any series whose format the user has locked is out of scope.** For example a talk-over-scenery series with a fixed voice, music bed, and caption format. No SFX layer there unless the user explicitly asks for that episode.
+- **Faith content:** never place a comic or percussive sound over spoken scripture or a speaker's solemn moment. When in doubt, leave the moment dry.
+- **Delivery gates still apply** to the final file: ffprobe delivery spec (h264, High, yuv420p, faststart) and, when speech matters, a re-transcription check that the words survived the mix.
 
-## Kit notes
+## Fallback kit
 
-- The kit sounds are synthesized locally (ffmpeg and numpy), so they are license-clean and regenerable. Regenerate rather than downloading random sounds of unknown license.
-- A real licensed SFX library can replace kit sounds one-for-one later; the cue sheet and mix rules do not change.
+A local `sfx-kit/` folder can hold synthesized sounds (click, pop, whoosh, riser, slam, chime, peaked at -6 dBFS). They are NOT for motion-video sound design (real-sfx doctrine above). They remain available only where the user explicitly wants a generated sound, for example a game UI blip, and are labeled as synthesized wherever used.
+
+## History
+
+Generalized from an adopted creator workflow and its underlying open-source skill.

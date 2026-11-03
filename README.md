@@ -50,7 +50,8 @@ walkthrough written for the Muse agent itself.
 | gsap-utils | GSAP utility helpers | Playbook | None |
 | design-dna | Turn reference designs into measured token profiles, then generate | Tool | npm install in its scripts/ |
 | genjutsu | Creative coding suite: cast, paint, bunshin, plus web modules | Playbook | None |
-| sound-design-pass | Cue-sheet SFX pass for edited video, verified acoustically | Playbook | ffmpeg + a local sfx kit |
+| real-sfx | Sound-design motion video with real recordings on the exact frame | Tool | Python + FFmpeg; setup.py check |
+| sound-design-pass | Wrapper over real-sfx with owner guardrails for edited video | Playbook | The real-sfx skill |
 
 Machine-readable details, including every placeholder to ask about, are in
 `catalog.json`.

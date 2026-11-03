@@ -39,6 +39,18 @@ walkthrough written for the Muse agent itself.
 | subagent-teams | Split big tasks across subagents and role-based teams under one coordinator | Playbook | None |
 | self-improvement-loop | Learn from every mistake, scout better tools, calibrate, and keep rules clean | Playbook | None |
 | stageshow | Build faux product UI stills and animated cursor demos that read as a real product | Tool | Node 20.19+, npm install |
+| motion-design | Motion principles for UI: timing, easing, choreography, personality | Playbook | None |
+| gsap-core | Official GSAP core animation guidance | Playbook | None |
+| gsap-frameworks | GSAP with Vue, Svelte, and other frameworks | Playbook | None |
+| gsap-performance | GSAP performance rules | Playbook | None |
+| gsap-plugins | GSAP plugins guidance | Playbook | None |
+| gsap-react | GSAP with React | Playbook | None |
+| gsap-scrolltrigger | GSAP ScrollTrigger guidance | Playbook | None |
+| gsap-timeline | GSAP Timeline guidance | Playbook | None |
+| gsap-utils | GSAP utility helpers | Playbook | None |
+| design-dna | Turn reference designs into measured token profiles, then generate | Tool | npm install in its scripts/ |
+| genjutsu | Creative coding suite: cast, paint, bunshin, plus web modules | Playbook | None |
+| sound-design-pass | Cue-sheet SFX pass for edited video, verified acoustically | Playbook | ffmpeg + a local sfx kit |
 
 Machine-readable details, including every placeholder to ask about, are in
 `catalog.json`.

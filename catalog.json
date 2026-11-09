@@ -3,6 +3,20 @@
   "notes": "Machine-readable catalog for the installing Muse. Each entry maps to a folder under skills/. 'placeholders' lists values to ask the user for at install time; store the answers privately for that user and never commit them back to a shared copy.",
   "skills": [
     {
+      "description": "Delegate work to Google Antigravity (the agy CLI) on a second, always-on computer over SSH, through a scheduled-task bridge that runs inside the user's logged-in session. Capability-gated: the installing Muse must confirm the user has an Antigravity account, an always-on machine, and SSH access before installing anything.",
+      "folder": "skills/antigravity-bridge",
+      "kind": "playbook",
+      "name": "antigravity-bridge",
+      "origin": "Original, generalized from a private working setup; all machine names, accounts, and paths replaced with placeholders.",
+      "placeholders": [
+        "<REMOTE_PC_HOST>",
+        "<REMOTE_PC_USER>",
+        "<REMOTE_BRIDGE_DIR>"
+      ],
+      "setup": "Capability gate first (see SKILL.md): do not install unless the user has an Antigravity account signed in on a second always-on computer and SSH access to it. Then run setup-bridge.ps1 on that computer to register the AgyBridge task, and place run.ps1 in the bridge folder.",
+      "title": "Antigravity bridge delegation over SSH"
+    },
+    {
       "description": "Geolocate or chronolocate a photo with tool-verified reasoning: metadata, OCR and reverse image search, a candidate board that ranks hypotheses, satellite and street-view matching, and sun/shadow math. Outputs coordinates plus an error radius with evidence.",
       "folder": "skills/geo-sleuth",
       "kind": "tool",

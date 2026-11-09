@@ -90,6 +90,14 @@ one skill at a time, asking conversationally:
   the user agrees; either way, they never leave the user's machine.
 - **design-system-audit**: no install-time values. The first time it is
   used, fill its Project values section from that app's theme source.
+- **antigravity-bridge**: CAPABILITY-GATED, do not install it like the
+  others. Before copying its folder, ask the user the three capability
+  questions in its `SKILL.md` (an Antigravity account signed in with
+  their Google account on the remote machine, a second always-on
+  computer, and SSH access to it). If they do not have all three, skip
+  the skill entirely and tell them what it would take to qualify. Only
+  if they have all three do you install it and fill its placeholders
+  (remote host, remote user, bridge directory).
 
 ## Step 5 — Set up the tools
 
@@ -147,6 +155,37 @@ Close by telling the user, in one short message:
 - anything left pending (for example `pdftotext`),
 - one example request per installed skill, in their words, that they can
   try right away.
+
+## Step 8 — Set up the weekly update check
+
+This library grows: new skills are added and existing ones improve. Set
+up a standing weekly check so the user hears about both without having
+to re-send the repo.
+
+1. Record what you installed: the repo URL, the commit you installed
+   from (`git rev-parse HEAD` in your clone, or the download date), and
+   the list of installed skill names. Keep this in your own notes for
+   the user, never in the repo.
+2. Create a recurring weekly scheduled task (your platform's cron or
+   scheduler) that does this, roughly once a week at a time the user is
+   usually around:
+   - Fetch the repo (`git fetch` in the clone, or re-read `catalog.json`
+     from the repo's GitHub page).
+   - Compare: new skill folders in `catalog.json` that are not
+     installed, and changes to skills that are installed (new commits
+     touching their folders since the recorded commit).
+   - If nothing changed, stay silent. Never message the user a
+     no-change report.
+   - If something changed, tell the user in plain language what is new
+     or updated, and offer to install or update it. Installing a NEW
+     skill still goes through Steps 2 to 6 (including any capability
+     gate or placeholders it declares). UPDATING an installed skill
+     still follows ground rule 5: show what would change and ask before
+     overwriting anything.
+3. After any install or update the check prompted, update your recorded
+   commit and skill list so the same change is never reported twice.
+4. Tell the user the check is set up, how often it runs, and that it
+   only speaks up when there is actually something new.
 
 ## Keeping the library current (for the library owner's Muse)
 

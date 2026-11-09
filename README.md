@@ -14,7 +14,9 @@ Send your Muse this repo's link with this message:
 > Set up the Muse skills from this repo for me. Read `SETUP.md` and
 > `catalog.json` first, then walk me through the whole setup step by step:
 > show me the skills, let me pick, install them, ask me for any placeholder
-> values, set up the tools, and verify each one works.
+> values, set up the tools, and verify each one works. Then set up the
+> weekly update check from Step 8 of `SETUP.md`, so you tell me when new
+> or updated skills land here.
 
 That is all a person has to do. `SETUP.md` contains the complete
 walkthrough written for the Muse agent itself.
@@ -23,6 +25,7 @@ walkthrough written for the Muse agent itself.
 
 | Skill | What it does | Type | Setup |
 | --- | --- | --- | --- |
+| antigravity-bridge | Delegate work to Google Antigravity on your always-on PC over SSH | Playbook | Capability check first, then the bridge scripts |
 | geo-sleuth | Geolocate a photo with tool-verified reasoning and an evidence trail | Tool | Its doctor script |
 | gods-eye | Live flights, weather, quakes, fires, launches, cameras, drive time for any point | Tool | venv + your home coordinates |
 | espn-fantasy | Read an ESPN fantasy hockey league's JSON: standings, rosters, points race, activity | Tool | venv + your league's values |

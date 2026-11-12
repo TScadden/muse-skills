@@ -29,8 +29,11 @@ fantasy league?", "check that drug's label") and have the right skill fire.
 4. **Stop at walls.** Sign-in prompts, payment screens, ID requests, and
    captchas you cannot complete are hand-offs to the user with exact steps,
    not obstacles to work around.
-5. **Never overwrite silently.** If a skill folder already exists on the
-   user's machine, ask before replacing it.
+5. **Never overwrite silently — with one exception.** If a skill folder
+   already exists on the user's machine, ask before replacing it. The
+   exception is the daily auto-update in Step 8: once the user has imported
+   a skill, updates to that skill are applied automatically and reported
+   afterwards, never gated on a prompt. First-time installs always ask.
 
 ## Step 1 — Get the files
 
@@ -156,36 +159,67 @@ Close by telling the user, in one short message:
 - one example request per installed skill, in their words, that they can
   try right away.
 
-## Step 8 — Set up the weekly update check
+## Step 8 — Set up the daily auto-update
 
-This library grows: new skills are added and existing ones improve. Set
-up a standing weekly check so the user hears about both without having
-to re-send the repo.
+This library is a living collection: its owner (Tyson) adds new skills and
+improves existing ones, and pushes the changes here. Set up a standing
+**daily** check under this contract:
 
-1. Record what you installed: the repo URL, the commit you installed
-   from (`git rev-parse HEAD` in your clone, or the download date), and
-   the list of installed skill names. Keep this in your own notes for
-   the user, never in the repo.
-2. Create a recurring weekly scheduled task (your platform's cron or
-   scheduler) that does this, roughly once a week at a time the user is
-   usually around:
-   - Fetch the repo (`git fetch` in the clone, or re-read `catalog.json`
-     from the repo's GitHub page).
-   - Compare: new skill folders in `catalog.json` that are not
-     installed, and changes to skills that are installed (new commits
-     touching their folders since the recorded commit).
-   - If nothing changed, stay silent. Never message the user a
-     no-change report.
-   - If something changed, tell the user in plain language what is new
-     or updated, and offer to install or update it. Installing a NEW
-     skill still goes through Steps 2 to 6 (including any capability
-     gate or placeholders it declares). UPDATING an installed skill
-     still follows ground rule 5: show what would change and ask before
-     overwriting anything.
-3. After any install or update the check prompted, update your recorded
-   commit and skill list so the same change is never reported twice.
-4. Tell the user the check is set up, how often it runs, and that it
-   only speaks up when there is actually something new.
+- **Updates to skills the user has imported are applied automatically.**
+  Never ask permission for an update. Afterwards, tell the user it
+  happened, and name the skills.
+- **New skills are offered, never installed unasked.** Asking about a new
+  skill is the only prompt in this whole system.
+- **Silence means nothing changed.** Never send a no-change report.
+
+### The state record
+
+Before creating the schedule, record the following in your own private
+notes for the user (never in this repo):
+
+- the repo URL, and the path of your local clone from Step 1 (if you
+  installed from a ZIP download, make a real `git clone` now — the daily
+  check needs one),
+- `imported`: the skill names the user installed in Step 3,
+- `declined`: skills the user was offered and said no to (starts empty),
+- `last-synced commit`: the clone's current `git rev-parse HEAD`.
+
+### The daily task
+
+Create a recurring daily scheduled task (your platform's cron or
+scheduler), at a time the user is usually around, that does exactly this:
+
+1. `git pull` in the clone (fast-forward only). If the pull fails
+   (offline, unreachable), end the run silently and try again tomorrow.
+2. Diff `last-synced commit`..new HEAD over `skills/` and re-read
+   `catalog.json`. Sort what you find into three buckets:
+   - **Updated:** an imported skill has changed files.
+   - **New:** a skill folder that is neither imported nor declined.
+   - Everything else (changes to skills the user never imported, docs,
+     catalog edits): ignore it.
+3. For each **updated** skill, apply the update automatically: replace the
+   installed folder in the custom-skills directory with the repo's new
+   `skills/<name>/` — but preserve anything that is the user's own inside
+   the installed copy: a `LOCAL_VALUES.md`, other private note files, and
+   any `.venv`. If the skill's `requirements.txt` changed, re-run its
+   Step 5 setup; if it has a smoke test in Step 6, re-run that too.
+4. Advance the state record: `last-synced commit` = new HEAD, whether or
+   not anything was applied, so no change is ever processed twice.
+5. If anything was updated, send the user one message naming the skills,
+   in this spirit: "Tyson updated his skills library, so I automatically
+   updated these skills for you: <names>. No action needed." If a smoke
+   test failed on an updated skill, say so plainly in the same message
+   and offer to roll that one skill back to the previous commit's copy.
+6. For each **new** skill, ask the user — one message listing them is
+   fine: name, one-line description, "want me to add it?" A yes runs
+   Steps 2 to 6 for that skill (its capability gate and placeholders
+   included) and adds it to `imported`. A no adds it to `declined`, and
+   that skill is never asked about again.
+
+Close by telling the user the check is set up: it runs daily, updates to
+skills they already have arrive on their own with a short note
+afterwards, and the only question they will ever be asked is whether to
+add a brand-new skill.
 
 ## Keeping the library current (for the library owner's Muse)
 

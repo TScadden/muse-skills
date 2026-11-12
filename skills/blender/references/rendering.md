@@ -45,6 +45,16 @@ Rule of thumb: **Cycles** when the user says photoreal/product/realistic, and on
 machines without a GPU; **EEVEE** for speed on a GPU, previews, motion graphics,
 toon/flat styles.
 
+**Matching a Cycles look in EEVEE (for animation).** When a scene was
+art-directed in Cycles but its animation must render in EEVEE for speed, gate
+on one test frame compared side-by-side with the Cycles still before rendering
+the sequence. Expect to compensate the ambient/light-path balance — the two
+engines gather ambient light differently, so the same lights read darker or
+flatter in EEVEE. EEVEE may also have no working shadow catcher in a headless
+setup: render a separate shadow pass instead (the occluding objects with a
+ghost/holdout-style material, lit by simple sun lights matched to the key and
+rim) and composite the contact shadow in post.
+
 ---
 
 ## 2. Samples, denoising, resolution
@@ -65,6 +75,30 @@ scene.render.resolution_percentage = 100
 ```
 Denoising lets you use far fewer samples — always enable it for quick, clean
 results.
+
+**Long high-res Cycles renders on an unreliable host — render in bands.** A
+single multi-hour full-frame render can be killed mid-run (host restart, OOM)
+and lose everything. Instead render horizontal border bands
+(`scene.render.use_border` + `border_min_y`/`border_max_y` +
+`use_crop_to_border`), each band to its own file, then stitch the bands into
+the full frame in post. Cycles seeds per pixel, so band seams are
+pixel-identical to a full-frame render. Bands are also resumable: keep the
+finished ones and re-render only what is missing.
+
+### Matching a reference's brightness (grade checks)
+
+Means lie. When matching a reference render's exposure or grade, compare
+**luminance band histograms** (the share of pixels in <15, 15–40, 40–80,
+80–140, 140–200, >200), not just the frame mean — identical means can hide
+completely different distributions, e.g. most of the frame crushed into one
+murky low band that reads as flat black on a small screen. Two more rules:
+
+- If the reference canvas includes empty margins (a viewport screenshot,
+  letterboxing), measure the reference's **subject area only**; the margins
+  drag the mean down and the match comes out too dark.
+- Judge any "a little brighter" tweak on a **phone-width side-by-side**. A
+  change that is invisible at the size the viewer actually sees it is a change
+  that did not happen.
 
 ---
 

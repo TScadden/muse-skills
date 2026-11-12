@@ -15,11 +15,17 @@ Send your Muse this repo's link with this message:
 > `catalog.json` first, then walk me through the whole setup step by step:
 > show me the skills, let me pick, install them, ask me for any placeholder
 > values, set up the tools, and verify each one works. Then set up the
-> weekly update check from Step 8 of `SETUP.md`, so you tell me when new
-> or updated skills land here.
+> daily auto-update from Step 8 of `SETUP.md`, so my skills keep
+> themselves current.
 
 That is all a person has to do. `SETUP.md` contains the complete
 walkthrough written for the Muse agent itself.
+
+**Staying current:** with Step 8 set up, your Muse checks this repo
+daily. Updates to skills you already have are installed automatically —
+you just get a short note naming what changed. Brand-new skills are
+offered to you once, and a no is remembered. When nothing has changed,
+you hear nothing.
 
 ## The skills
 

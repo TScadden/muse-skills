@@ -63,9 +63,21 @@ blender -b --factory-startup --python-exit-code 1 -P scene.py -- --out /tmp/out.
 - `pip install bpy==5.2.3` (Python 3.13) gives Blender as a Python module, handy
   for tests. There, `import bpy` must come **before** `import bmesh` or
   `mathutils`.
+- **EEVEE headless needs libEGL.** Headless EEVEE fails where `libEGL.so.1` is
+  missing (common on servers and VMs) even though Cycles works fine. If you
+  cannot install system packages, extract them into the workspace instead:
+  `apt-get download libegl1 libegl-mesa0`, unpack both with `dpkg -x` into a
+  local folder, and launch Blender through a wrapper that sets
+  `LD_LIBRARY_PATH` to the extracted `usr/lib/x86_64-linux-gnu` directory and
+  `LIBGL_ALWAYS_SOFTWARE=1`. No system change needed.
 
 ## Context & reference footguns (all versions)
 
+- **Quaternion composition is `@`, never `*`** — in mathutils, `q1 * q2`
+  multiplies component-wise; it does NOT compose rotations, and it fails
+  silently (the result still looks like a quaternion, so nothing errors — the
+  object or camera just ends up rotated somewhere inexplicable). Compose with
+  `q1 @ q2`, e.g. `cam.rotation_quaternion = track_quat @ roll_quat`.
 - **`context is incorrect`** — an operator ran headless without the needed
   context. Use `bpy.context.temp_override(...)` or, better, the data API.
 - **`StructRNA of type ... has been removed`** — you held a Python reference to a

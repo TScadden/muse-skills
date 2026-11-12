@@ -94,6 +94,27 @@ that step: code generated shapes, nobody designed them.
   Features must be *shaped into* the form or built as forms with their
   own edge flow that intersect the main form convincingly.
 
+### 2b. Panels, prints and recesses on a formed body
+
+- **Panels are shells, not plates.** A grille, face plate or screen that must
+  read as part of a rounded body is built as a surface-following shell:
+  ray-cast its vertices onto the real body surface, offset along the surface
+  by a small constant lift, and solidify *inward* so the rim buries into the
+  body all the way around. Corner arcs are sampled from the body's own
+  radius. A flat plate placed in front of a curved face always betrays
+  itself — overhanging lip, dark gap strip, kinked corner.
+- **Recesses are real geometry.** An indented channel framing a panel (the
+  pressed-in groove a grille sits in) is a boolean cut whose floor is an
+  offset of the body surface, so the groove depth stays constant around
+  corners and edge rolls. Re-seat the panel on the recess floor afterwards;
+  never fake the groove with texture or a dark line.
+- **Prints go under the perforation.** A graphic printed on a perforated
+  panel lives inside the panel's own material (or on the baffle beneath),
+  and the perforation mask drives both the alpha and the graphic's surface
+  colour to hole-dark at every dot. The dots then structure the graphic at
+  the same contrast as the bare panel. A graphic laid over the holes reads
+  as a smooth decal — a different surface glued on.
+
 ### 3. Detail & Geometry Nodes assists
 - Tertiary detail last, at a resolution that can hold it (Dyntopo
   after proportions lock; remember Dyntopo/remesh destroys colour
@@ -149,6 +170,8 @@ that step: code generated shapes, nobody designed them.
 | Scatter modifier replaced the mesh with instances | GN graph forgot to join the source geometry back | Join Geometry node takes source + instances (recipes file) |
 | GN graph crashes on Blender 4.x | Built with pre-4.0 `inputs.new()` API | Use `tree.interface.new_socket(...)` |
 | Whole asset renders WHITE (or unshaded) after adding a GN scatter, though every part's vertex colours check out | Realizing instances leaves an **empty material slot** on the host mesh; on join, every polygon keeps material_index 0 (the empty slot) and the appended vertex-colour material is never used | Clear the host mesh's material slots right after applying the GN modifier (`obj.data.materials.clear()`), before joining/painting. Diagnose by printing the joined object's material list — `[None, 'VCOL']` is the tell |
+| Panel reads as a separate plate stuck on the body (lip, gap strip, kinked corner) | Flat panel placed in front of a curved/rounded face; its edges and corners cannot follow the form | Rebuild it as a surface-following shell (see "Panels, prints and recesses"): ray-cast onto the body surface, solidify inward so the rim buries in, corner arcs from the body's own radius |
+| Graphic on a perforated panel looks like a smooth sticker | Print composited over the perforation, so the holes never interrupt it and it follows different surface logic than the panel | Print under the perforation (see "Panels, prints and recesses"): the mask drives the graphic's surface colour to hole-dark at every dot, so the dots structure it at full panel contrast |
 
 ## Scripting notes (headless Blender via bpy)
 

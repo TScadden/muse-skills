@@ -146,6 +146,36 @@ a Python module: run the script with `python scene.py` (import `bpy` before
 that is impossible too, say so and hand over the script for the user to run.
 Never fabricate a render you didn't produce.
 
+## Driving a live Blender session (MCP / add-on)
+
+When the work runs through a live connection to the user's open
+Blender (an MCP add-on or similar), the failure mode is silent:
+commands can go nowhere while both sides believe modelling is
+happening — the classic first-session result is a script produced
+*instead of* a scene, discovered only when the user looks.
+
+- **Verify the link first.** Query the scene (object list, counts)
+  and confirm the answer matches what the user sees before building
+  anything. Re-check after any reconnect.
+- **If the link is down, say so and fall back.** Hand over a
+  standalone script the user can run themselves (Scripting
+  workspace → New → paste → Run Script), written to the same
+  standards as a headless build. Never present script-only output as
+  if it had been built live.
+- **Pipeline work is iterative debugging.** Getting a rig to export
+  and move correctly in a game engine (Rigify → Unreal is the
+  notorious case) takes several fix rounds — a foot reversed, a
+  squash-and-stretch, a drift — each round changing one thing and
+  verifying *in the target engine*, not in Blender. Budget for the
+  rounds and log what each fix actually was.
+- **Package solved pipelines.** When a multi-round pipeline finally
+  works, capture it as a reusable script or add-on so the next
+  character reuses it instead of re-deriving it.
+- **Small generative assets are a sweet spot.** Texture brushes,
+  presets and similar scoped assets generate well; create them as
+  real assets and save them into the user's asset library so they
+  persist across sessions.
+
 ## Verifying without a GUI
 
 - Render one frame at low samples to a PNG and **open/inspect the image**.

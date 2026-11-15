@@ -59,6 +59,13 @@ that step: code generated shapes, nobody designed them.
   material), scaled so the character's height on the plane equals the
   target height in units, one on the front axis, one on the side axis,
   offset behind the modeling space.
+- **One view is not a reference set.** A single front image
+  underdetermines depth: generation from it produces a paper-thin
+  model — the picture pasted in with a bit of volume, gaps where the
+  unseen side had to be invented. For anything with real form, get
+  front + side (and back for characters) before building; where only
+  one view exists, the side profile is *designed* deliberately and
+  the side silhouette gate is judged as strictly as the front.
 
 ### 1. Blockout (primary forms only)
 - Build only the 3–6 primary masses (torso mass, head, limbs, the
@@ -115,6 +122,34 @@ that step: code generated shapes, nobody designed them.
   the same contrast as the bare panel. A graphic laid over the holes reads
   as a smooth decal — a different surface glued on.
 
+### 2c. Build in pieces; iterate without regressing
+
+- **Characters are assembled, not summoned.** Build the parts as
+  deliberate pieces — head, torso, limbs, costume/armour pieces —
+  each passing its own silhouette check, then join them into the
+  form. A single monolithic pass at a whole character reliably
+  produces unmerged pieces sticking out of a distorted base, wrong
+  anatomy in the details (thumbs on the wrong side of the hands is
+  the classic tell), and blobs where structure should be.
+- **Anatomy is specified, never assumed.** Handedness and anatomy
+  facts go in the build spec (thumbs inboard in a neutral pose,
+  elbows/knees bend the right way) and get their own line in the QC
+  renders — a generator with perfect references still ships mirrored
+  hands if nobody checks.
+- **Label versions in the scene** (v1, v2, … side by side, version
+  text in the render) so progress — and regress — is visible at a
+  glance.
+- **Every feedback round is diffed.** Compare the new version against
+  the previous one and list what changed *outside* the requested fix.
+  Iteration degrades silently: a round asked to close gaps opened a
+  new one elsewhere; a round asked for detail removed it somewhere
+  else. A regression found in the diff is fixed before the round
+  counts.
+- **"More detail" means structure, never polygon count.** A detail
+  pass names the features it adds (a brow, a seam, a claw). Raising
+  subdivision or smoothing a deliberately faceted low-poly style is
+  a regression, not detail — the style is part of the spec.
+
 ### 3. Detail & Geometry Nodes assists
 - Tertiary detail last, at a resolution that can hold it (Dyntopo
   after proportions lock; remember Dyntopo/remesh destroys colour
@@ -155,6 +190,24 @@ that step: code generated shapes, nobody designed them.
   results factually**, including what is still off. A render you
   haven't looked at is not a QC pass.
 
+## Variations on a proven asset
+
+Once a hero asset passes the gates, generating **variants** of it —
+proportions, colours, outfits, body types — is fast, legitimate
+work: a spread of drafts the owner can react to, test in-engine, and
+pick winners from. Rules:
+
+- Vary the finished asset; don't regenerate from the reference.
+  Structure, topology and (when present) the rig and weights carry
+  over — that's the point.
+- Variants are drafts for selection, not finals. The winner goes
+  back through the gates before it ships.
+- Expect and check the standard failure modes: every variant keeps
+  the identical head/face, "variation" that is only a colour swap,
+  and incoherent proportions (a heavy-set body on a pinched waist).
+  A variant set where only the palette changed is one variant, not
+  a set.
+
 ## Failure-mode table
 
 | Symptom | Root cause | Fix |
@@ -172,6 +225,12 @@ that step: code generated shapes, nobody designed them.
 | Whole asset renders WHITE (or unshaded) after adding a GN scatter, though every part's vertex colours check out | Realizing instances leaves an **empty material slot** on the host mesh; on join, every polygon keeps material_index 0 (the empty slot) and the appended vertex-colour material is never used | Clear the host mesh's material slots right after applying the GN modifier (`obj.data.materials.clear()`), before joining/painting. Diagnose by printing the joined object's material list — `[None, 'VCOL']` is the tell |
 | Panel reads as a separate plate stuck on the body (lip, gap strip, kinked corner) | Flat panel placed in front of a curved/rounded face; its edges and corners cannot follow the form | Rebuild it as a surface-following shell (see "Panels, prints and recesses"): ray-cast onto the body surface, solidify inward so the rim buries in, corner arcs from the body's own radius |
 | Graphic on a perforated panel looks like a smooth sticker | Print composited over the perforation, so the holes never interrupt it and it follows different surface logic than the panel | Print under the perforation (see "Panels, prints and recesses"): the mask drives the graphic's surface colour to hole-dark at every dot, so the dots structure it at full panel contrast |
+| Paper-thin model, like the picture pasted in with a bit of volume | Built from a single 2D view; depth extrapolated instead of designed | Get front + side references; design the side profile deliberately; judge the side silhouette as strictly as the front |
+| Thumbs on the wrong side of the hands; mirrored anatomy | Handedness never stated or checked — references alone don't enforce anatomy | Put anatomy facts in the build spec; add a handedness line to the QC renders (thumbs inboard in neutral pose) |
+| "More detail" round made it smoother and worse | Detail read as polygon count; subdivision/smoothing applied over a deliberately faceted style | A detail pass names the structural features it adds; smoothing/subdivision changes are forbidden unless requested; re-check the style after the pass |
+| A fix round broke something that was already fine (new gap, lost feature) | Whole-model edits with no diff against the previous version | Label versions side by side; diff every round and list changes outside the requested fix; fix regressions before the round counts |
+| Pieces stick out as separate unmerged objects (an ear, a blob on the torso) | Parts placed but never joined or fused into the form | Join/boolean pieces deliberately (blender skill: join discipline); verify the final object count matches the spec |
+| Variant set all share one head, or differ only in colour | Variation applied to materials/proportions only; structure untouched | Vary structure per variant (head, silhouette, outfit pieces); a colour-only change counts as one variant |
 
 ## Scripting notes (headless Blender via bpy)
 

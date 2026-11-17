@@ -346,6 +346,16 @@
         "Blender 4.2+",
         "Pillow"
       ]
+    },
+    {
+      "description": "Live natural events worldwide (severe storms, wildfires, volcanoes, earthquakes, floods and more) from NASA's free EONET API v3, no API key. Events carry dated GeoJSON geometry and magnitudes over time.",
+      "folder": "skills/nasa-eonet",
+      "kind": "tool",
+      "name": "nasa-eonet",
+      "origin": "Original.",
+      "placeholders": [],
+      "setup": "None; eonet.py uses only the Python standard library.",
+      "title": "NASA EONET natural events"
     }
   ],
   "version": 1

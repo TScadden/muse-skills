@@ -36,6 +36,7 @@ you hear nothing.
 | gods-eye | Live flights, weather, quakes, fires, launches, cameras, drive time for any point | Tool | venv + your home coordinates |
 | espn-fantasy | Read an ESPN fantasy hockey league's JSON: standings, rosters, points race, activity | Tool | venv + your league's values |
 | drug-info | FDA drug labels, NDC details, and recalls via openFDA. Reference only | Tool | None |
+| nasa-eonet | Live natural events worldwide (storms, wildfires, volcanoes, quakes) via NASA's free EONET API, no key | Tool | None |
 | people-search-scrub | Remove your number from people-search sites and data brokers, site by site | Playbook | Your details, kept private |
 | blender-modeling | Model stylized game assets in Blender: reference-driven, proportion-first, gated QC | Playbook | Blender 4.x |
 | build-wiring-readback-audit | Prove an app screen's controls are wired and its saves landed before calling it done | Playbook | None |

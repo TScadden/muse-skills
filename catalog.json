@@ -358,7 +358,7 @@
    "title": "NASA EONET natural events"
   },
   {
-   "description": "Turn a one-line brief into a fully narrated archival short film or sizzle reel assembled entirely from public-domain footage (NASA films, 1950s science reels, government archives): research and treatment, source logging, sequencing, voiceover, titles, and a verified 1080p master.",
+   "description": "Turn a one-line brief about any topic into a fully narrated archival short film or sizzle reel assembled entirely from public-domain footage, with source pools, era, and narration tone chosen to fit the topic: research and treatment, source logging, sequencing, voiceover, titles, and a verified 1080p master.",
    "folder": "skills/vid-assembly",
    "kind": "playbook",
    "name": "vid-assembly",

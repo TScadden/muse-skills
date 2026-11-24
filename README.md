@@ -38,6 +38,7 @@ you hear nothing.
 | drug-info | FDA drug labels, NDC details, and recalls via openFDA. Reference only | Tool | None |
 | nasa-eonet | Live natural events worldwide (storms, wildfires, volcanoes, quakes) via NASA's free EONET API, no key | Tool | None |
 | vid-assembly | Turn a one-line brief about any topic into a fully narrated archival short film from public-domain footage | Playbook | None |
+| wordle-fortune | The next week of NYT Wordle answers (or any date's) from the game's own date endpoint, which serves answers about six weeks early | Tool | None |
 | people-search-scrub | Remove your number from people-search sites and data brokers, site by site | Playbook | Your details, kept private |
 | blender-modeling | Model stylized game assets in Blender: reference-driven, proportion-first, gated QC | Playbook | Blender 4.x |
 | build-wiring-readback-audit | Prove an app screen's controls are wired and its saves landed before calling it done | Playbook | None |

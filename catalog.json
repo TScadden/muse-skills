@@ -366,6 +366,16 @@
    "placeholders": [],
    "setup": "None; a self-contained instruction skill for an AI assistant with web and video tools.",
    "title": "Archival video assembly from public-domain footage"
+  },
+  {
+   "description": "Reveal the next week of NYT Wordle answers, or any date's answer past or future, from the game's own date endpoint, which serves answers about six weeks early: weekday, date, puzzle number, answer, and editor, fetched live on every run.",
+   "folder": "skills/wordle-fortune",
+   "kind": "tool",
+   "name": "wordle-fortune",
+   "origin": "Original; method from @liam.codez's Wordle reverse-engineering video.",
+   "placeholders": [],
+   "setup": "None; wordle_fortune.py uses only the Python standard library.",
+   "title": "Wordle Fortune: next week's Wordle answers"
   }
  ],
  "version": 1

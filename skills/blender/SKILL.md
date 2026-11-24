@@ -209,6 +209,9 @@ happening — the classic first-session result is a script produced
 | Subject cut off at frame edge | Hand-placed camera; use `add_framing_camera()` |
 | `StructRNA has been removed` | Held a stale reference after data was reallocated |
 | Washed-out/overexposed render | Wrong view transform or exposure; light power too high |
+| Emissive disc/plane invisible in render; object exists but has 0 polygons | `primitive_circle_add` in headless/background mode defaults to `fill_type='NOTHING'` (an unfilled edge ring); pass `fill_type='NGON'` explicitly |
+| 4-point cross flare where a clean horizontal anamorphic streak is wanted | Compositor Glare `STREAKS` always draws a cross; fake the streak in-scene instead: a camera-facing plane at the light with a soft horizontal gradient texture driving emission/alpha |
+| `KeyError: 'Sheen Color'` on Blender 4.0.2 | 4.0.2's Principled uses `Sheen Tint` (a COLOR socket, despite the name); `Coat Weight`, `Subsurface Weight`, `Emission Color`/`Emission Strength` do exist in 4.0 |
 
 ## Reference files
 

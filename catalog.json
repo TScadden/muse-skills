@@ -376,6 +376,16 @@
    "placeholders": [],
    "setup": "None; wordle_fortune.py uses only the Python standard library.",
    "title": "Wordle Fortune: next week's Wordle answers"
+  },
+  {
+   "description": "Free disk space on Muse's own machine by clearing regenerable caches (package managers, model downloads, browser binaries) and surfacing stale duplicate tool installs, measuring disk before and after. Never deletes databases, backups, or project work product.",
+   "folder": "skills/storage-cleanup",
+   "kind": "playbook",
+   "name": "storage-cleanup",
+   "origin": "Original, generalized from a working local cleanup routine.",
+   "placeholders": [],
+   "setup": "None.",
+   "title": "Storage Cleanup: free disk space safely"
   }
  ],
  "version": 1
